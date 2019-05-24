@@ -6,4 +6,10 @@ These resources are designed to allow for easier access to the contents of the g
 
 # Usage
 
-TODO: Add some instructions on how to include this in other profiles
+To use these resources add the following to the profiles `inspec.yml`
+
+```
+depends:
+- name: glresources
+  url: https://github.com/teknofire/glresources/archive/master.tar.gz
+```
