@@ -26,6 +26,11 @@ describe_inspec_resource 'disk_usage' do
     let(:rootfs) { resource.mount('/') }
     let(:nofs) { resource.mount('nofs') }
 
+    it 'should return a standardize size' do
+      expect(resource.to_filesize('250M')).to eq '250.0M'
+      expect(resource.to_filesize(262144000)).to eq '250.0M'
+    end
+
     it 'should find root fs' do
       expect(rootfs.exists?).to eq true
     end
