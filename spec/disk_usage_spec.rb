@@ -1,10 +1,8 @@
 require 'spec_helper'
 describe_inspec_resource 'disk_usage' do
   context 'with bad content' do
-    before do
-      environment do
-        file('df_h.txt').returns(exist?: false, content: '')
-      end
+    environment do
+      file('df_h.txt').returns(exist?: false, content: '')
     end
 
     it 'should not find root fs' do
@@ -17,10 +15,8 @@ describe_inspec_resource 'disk_usage' do
   end
 
   context 'with good content' do
-    before do
-      environment do
-        file('df_h.txt').returns(exist?: true, content: File.read('spec/fixtures/df_h.txt'))
-      end
+    environment do
+      file('df_h.txt').returns(exist?: true, content: File.read('spec/fixtures/df_h.txt'))
     end
 
     let(:rootfs) { resource.mount('/') }
