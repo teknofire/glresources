@@ -2,10 +2,8 @@ require 'spec_helper'
 
 describe_inspec_resource 'cpu_info' do
   context 'with bad content' do
-    before do
-      environment do
-        file('cpuinfo.txt').returns(exist?: true, content: 'foo')
-      end
+    environment do
+      file('cpuinfo.txt').returns(exist?: true, content: 'foo')
     end
 
     it 'should exist' do
@@ -30,10 +28,8 @@ describe_inspec_resource 'cpu_info' do
   end
 
   context 'with cpuinfo.txt' do
-    before do
-      environment do
-        file('cpuinfo.txt').returns(exist?: true, content: File.read('spec/fixtures/cpuinfo.txt'))
-      end
+    environment do
+      file('cpuinfo.txt').returns(exist?: true, content: File.read('spec/fixtures/cpuinfo.txt'))
     end
 
     it 'should exist' do
@@ -58,24 +54,24 @@ describe_inspec_resource 'cpu_info' do
   end
 
   context 'with proc/cpuinfo' do
-    it 'should exist' do
-      environment do
-        file('cpuinfo.txt').returns(exist?: false)
-        file('proc/cpuinfo').returns(exist?: true, content: 'foo')
-      end
+    environment do
+      file('cpuinfo.txt').returns(exist?: false)
+      file('proc/cpuinfo').returns(exist?: true, content: 'foo')
+    end
 
+    it 'should exist' do
       expect(resource.exists?).to eq(true)
     end
   end
 
   context 'with no file' do
-    it 'should not exist' do
-      environment do
-        file('cpuinfo.txt').returns(exist?: false)
-        file('proc/cpuinfo').returns(exist?: false)
-        file('invalid').returns(exist?: false)
-      end
+    environment do
+      file('cpuinfo.txt').returns(exist?: false)
+      file('proc/cpuinfo').returns(exist?: false)
+      file('invalid').returns(exist?: false)
+    end
 
+    it 'should not exist' do
       expect(resource.exists?).to eq(false)
     end
   end
