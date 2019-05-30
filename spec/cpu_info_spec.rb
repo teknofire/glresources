@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'libraries/cpu_info'
 
 describe_inspec_resource 'cpu_info' do
   context 'with bad content' do

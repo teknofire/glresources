@@ -1,9 +1,6 @@
 require 'inspec'
 require 'rspec/its'
 require 'pry'
-require 'libraries/cpu_info'
-require 'libraries/common_logs'
-require 'libraries/disk_usage'
 
 # To test each of your resources, they will need to be required
 # to have the InSpe registry know about it.

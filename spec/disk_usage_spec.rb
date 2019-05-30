@@ -1,4 +1,6 @@
 require 'spec_helper'
+require 'libraries/disk_usage'
+
 describe_inspec_resource 'disk_usage' do
   context 'with bad content' do
     environment do
