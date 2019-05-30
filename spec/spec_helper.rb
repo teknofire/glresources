@@ -35,7 +35,6 @@ shared_context 'InSpec Resource', type: :inspec_resource do
   #   they will be executed against.
   let(:resource_class) { Inspec::Resource.registry[resource_name] }
 
-  #
   def self.environment_builder(builder = nil)
     if builder
       @environment_builder = builder
@@ -52,7 +51,7 @@ shared_context 'InSpec Resource', type: :inspec_resource do
     #   all the environment builders in th current context and their
     #   parent contexts.
     let(:backend) do
-      env_builders = self.class.parent_groups.map { |parent| parent.environment_builder }.compact
+      env_builders = self.class.parent_groups.map(&:environment_builder).compact
       starting_double = RSpec::Mocks::Double.new('backend')
       env_builders.inject(starting_double) { |acc, elem| elem.evaluate(self, acc) }
     end
@@ -119,6 +118,7 @@ class DoubleBuilder
     @backend_doubles ||= []
   end
 
+  # rubocop:disable Style/MethodMissingSuper,Style/MissingRespondToMissing
   def method_missing(backend_method_name, *args, &_block)
     backend_double = BackendDouble.new(backend_method_name)
     backend_double.inputs = args unless args.empty?
@@ -126,6 +126,7 @@ class DoubleBuilder
     # NOTE: The block is ignored.
     self
   end
+  # rubocop:enable Style/MethodMissingSuper,Style/MissingRespondToMissing
 
   class InSpecResouceMash < Hashie::Mash
     disable_warnings
