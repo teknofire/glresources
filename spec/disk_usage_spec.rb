@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'libraries/disk_usage'
 
 describe_inspec_resource 'disk_usage' do
-  context 'with bad content' do
+  context 'with no content' do
     environment do
       file('df_h.txt').returns(exist?: false, content: '')
     end
