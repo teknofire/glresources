@@ -24,12 +24,12 @@ describe_inspec_resource 'memory' do
     end
 
     it 'should find swap space info' do
-      swap_data = { "available"=>nil, "buff/cache"=>nil, "free"=>100, "shared"=>nil, "total"=>100, "used"=>0 }
+      swap_data = { "available" => nil, "buff/cache" => nil, "free" => 100, "shared" => nil, "total" => 100, "used" => 0 }
       expect(resource.swap).to eq swap_data
     end
 
     it 'should find mem info' do
-      mem_data = { "available"=>5114, "buff/cache"=>4889, "buffers"=>0, "cached"=>4889, "free"=>681, "shared"=>160, "total"=>7478, "used"=>1906 }
+      mem_data = { "available" => 5114, "buff/cache" => 4889, "buffers" => 0, "cached" => 4889, "free" => 681, "shared" => 160, "total" => 7478, "used" => 1906 }
       expect(resource.mem).to eq mem_data
     end
 
@@ -79,6 +79,6 @@ describe_inspec_resource 'memory' do
       # total   free    buffers   cached    available
       # 32109 - 13505 + 275     + 2561    = 21440
       expect(resource.available_mem).to eq 21440
-    end    
+    end
   end
 end
